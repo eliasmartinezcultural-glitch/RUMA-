@@ -1,0 +1,18 @@
+{
+  "id": "identificador-unico",
+  "title": "Título de la publicación",
+  "subtitle": "Una bajada breve y clara",
+  "description": "Descripción para presentar el material al público.",
+  "collection": "historia",
+  "type": "libro",
+  "format": "PDF",
+  "author": "Autor o institución",
+  "date": "2026-01-01",
+  "status": "draft",
+  "cover": "assets/portadas/mi-portada.jpg",
+  "file": "publicaciones/historia/mi-publicacion.pdf",
+  "readingUrl": "",
+  "credits": "Créditos y permisos",
+  "sources": ["Fuente documental consultada"],
+  "tags": ["historia", "memoria local"]
+}
