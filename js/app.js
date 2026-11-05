@@ -36,10 +36,22 @@
     [search,type,sort].filter(Boolean).forEach(element=>element.addEventListener('input',update));
     update();
   }
+  function renderPublication(){
+    const target=$('#publication-detail'); if(!target)return;
+    const id=new URLSearchParams(location.search).get('id');
+    const item=published.find(entry=>entry.id===id);
+    if(!item){target.innerHTML='<div class="empty-state"><span>⌕</span><h3>Esta publicación no está disponible.</h3><p>Puede que todavía no se haya publicado o que el enlace no sea correcto.</p><a class="text-link" href="colecciones.html">Volver al catálogo</a></div>';return;}
+    document.title=item.title+' — La Repisa Chañarense';
+    const cover=item.cover?'<img src="'+safe(item.cover)+'" alt="Portada de '+safe(item.title)+'">':'<span class="cover-symbol" aria-hidden="true">✳</span>';
+    const download=item.file?'<a class="button button-primary" href="'+safe(item.file)+'" download>Descargar material ↓</a>':'';
+    const read=item.readingUrl?'<a class="button button-light" href="'+safe(item.readingUrl)+'" target="_blank" rel="noopener">Leer en línea ↗</a>':'';
+    const sources=(item.sources||[]).map(source=>'<li>'+safe(source)+'</li>').join('');
+    target.innerHTML='<article class="detail-layout"><div class="detail-cover">'+cover+'</div><div class="detail-copy"><span class="eyebrow">'+safe(collectionNames[item.collection]||'Colección')+' · '+safe(item.type||'Material')+'</span><h1>'+safe(item.title)+'</h1>'+(item.subtitle?'<p class="detail-subtitle">'+safe(item.subtitle)+'</p>':'')+'<p class="detail-description">'+safe(item.description||'')+'</p><div class="detail-actions">'+download+read+'</div><dl class="detail-metadata">'+(item.author?'<div><dt>Autoría</dt><dd>'+safe(item.author)+'</dd></div>':'')+(item.date?'<div><dt>Fecha</dt><dd>'+safe(item.date)+'</dd></div>':'')+(item.credits?'<div><dt>Créditos</dt><dd>'+safe(item.credits)+'</dd></div>':'')+'</dl>'+(sources?'<div class="detail-sources"><h2>Fuentes y referencias</h2><ul>'+sources+'</ul></div>':'')+'</div></article>';
+  }
   function initSearch(){
     const form=$('#search-form'), input=$('#catalog-search');
     if(form&&input)form.addEventListener('submit',event=>{event.preventDefault();location.href='colecciones.html?q='+encodeURIComponent(input.value.trim());});
-    if(input&&location.pathname.endsWith('colecciones.html')){const q=new URLSearchParams(location.search).get('q');if(q)input.value=q;}
+    if(input&&location.pathname.endsWith('colecciones.html')){const q=new URLSearchParams(location.search).get('q');if(q){input.value=q;input.dispatchEvent(new Event('input'));}}
   }
   function initMenu(){
     const button=$('.menu-toggle'),nav=$('#site-nav');if(!button||!nav)return;
@@ -55,5 +67,5 @@
       }catch(error){if(feedback){feedback.textContent='Alias: '+value;feedback.classList.add('show');}}
     });
   }
-  renderHome();renderCatalog();initSearch();initMenu();initAlias();
+  renderHome();renderCatalog();renderPublication();initSearch();initMenu();initAlias();
 })();
