@@ -411,5 +411,4 @@ window.REPISA_CATALOG = {
       ]
     }
   ]
-  ]
 };
