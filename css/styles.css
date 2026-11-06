@@ -81,3 +81,13 @@ body{font-size:17px;line-height:1.7}
  .support-alias{font-size:9px}
  .copy-alias{font-size:9px;padding:6px}
 }
+
+
+/* Lectura editorial: artículos breves, cómodos y accesibles. */
+.detail-reading{margin:30px 0 26px;max-width:72ch;padding:24px;background:#fffdf8;border:1px solid rgba(80,65,45,.12);border-radius:18px}
+.detail-reading h2{font-size:1.45rem;margin:0 0 18px;color:#354b3d}
+.detail-reading p{font-size:1.08rem;line-height:1.85;color:#45443d;margin:0 0 16px}
+.detail-reading p:last-child{margin-bottom:0}
+.detail-sources a{color:#315d48;text-decoration:underline;text-underline-offset:3px}
+.detail-sources li{margin:0 0 10px;line-height:1.6}
+@media(max-width:600px){.detail-reading{padding:18px;margin:22px 0}.detail-reading p{font-size:1.02rem;line-height:1.75}}
